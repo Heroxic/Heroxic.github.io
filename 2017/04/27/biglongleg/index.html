@@ -6,19 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>前端静态资源版本更新与缓存之——通过gulp 在原html文件上自动化添加js、css版本号 | Xieyy</title>
+  <title>BIG LONG LEG !!! | Xieyy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="原理 修改js和css文件  通过对js,css文件内容进行hash运算，生成一个文件的唯一hash字符串 ( 如果文件修改则hash号会发生变化 )  替换html中的js,css文件名，生成一个带版本号的文件名   方案 现在网上的方案都是生成一个新的dist目录，里面包含了要发布的html,js,css等文件。但是在实际的公司的项目中，会有情况不能生成新的HTML进行发布，需要在原来的HTM">
-<meta name="keywords" content="Gulp">
+  <meta name="keywords" content="随笔">
 <meta property="og:type" content="article">
-<meta property="og:title" content="前端静态资源版本更新与缓存之——通过gulp 在原html文件上自动化添加js、css版本号">
-<meta property="og:url" content="http://yoursite.com/2017/04/27/gulp-version-manage/index.html">
+<meta property="og:title" content="BIG LONG LEG !!!">
+<meta property="og:url" content="http://yoursite.com/2017/04/27/biglongleg/index.html">
 <meta property="og:site_name" content="Xieyy">
-<meta property="og:description" content="原理 修改js和css文件  通过对js,css文件内容进行hash运算，生成一个文件的唯一hash字符串 ( 如果文件修改则hash号会发生变化 )  替换html中的js,css文件名，生成一个带版本号的文件名   方案 现在网上的方案都是生成一个新的dist目录，里面包含了要发布的html,js,css等文件。但是在实际的公司的项目中，会有情况不能生成新的HTML进行发布，需要在原来的HTM">
-<meta property="og:updated_time" content="2017-04-27T05:36:23.614Z">
+<meta property="og:image" content="http://op1x388xb.bkt.clouddn.com/timg.jpg">
+<meta property="og:updated_time" content="2017-04-27T08:50:44.324Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="前端静态资源版本更新与缓存之——通过gulp 在原html文件上自动化添加js、css版本号">
-<meta name="twitter:description" content="原理 修改js和css文件  通过对js,css文件内容进行hash运算，生成一个文件的唯一hash字符串 ( 如果文件修改则hash号会发生变化 )  替换html中的js,css文件名，生成一个带版本号的文件名   方案 现在网上的方案都是生成一个新的dist目录，里面包含了要发布的html,js,css等文件。但是在实际的公司的项目中，会有情况不能生成新的HTML进行发布，需要在原来的HTM">
+<meta name="twitter:title" content="BIG LONG LEG !!!">
+<meta name="twitter:image" content="http://op1x388xb.bkt.clouddn.com/timg.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Xieyy" type="application/atom+xml">
   
@@ -150,134 +149,28 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-gulp-version-manage" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-biglongleg" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      前端静态资源版本更新与缓存之——通过gulp 在原html文件上自动化添加js、css版本号
+      BIG LONG LEG !!!
     </h1>
   
 
         
-        <a href="/2017/04/27/gulp-version-manage/" class="archive-article-date">
-  	<time datetime="2017-04-27T05:03:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-27</time>
+        <a href="/2017/04/27/biglongleg/" class="archive-article-date">
+  	<time datetime="2017-04-27T08:47:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-27</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><ul>
-<li><p>修改js和css文件</p>
-</li>
-<li><p>通过对js,css文件内容进行hash运算，生成一个文件的唯一hash字符串 ( 如果文件修改则hash号会发生变化 )</p>
-</li>
-<li><p>替换html中的js,css文件名，生成一个带版本号的文件名</p>
-</li>
-</ul>
-<h2 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h2><blockquote>
-<p>现在网上的方案都是生成一个新的dist目录，里面包含了要发布的html,js,css等文件。但是在实际的公司的项目中，会有情况不能生成新的HTML进行发布，需要在原来的HTML文件上进行js ,css版本的替换. 这里分享下我在实际项目中通过改动插件然后在原目录结构下进行版本的控制方案。</p>
-</blockquote>
-<h4 id="原html文件代码"><a href="#原html文件代码" class="headerlink" title="原html文件代码"></a>原html文件代码</h4><pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;../css/default.css&quot;&gt;
-&lt;script src=&quot;../js/app.js&quot;&gt;&lt;/script&gt;
-</code></pre><h4 id="预期效果：在原目录结构下html文件代码"><a href="#预期效果：在原目录结构下html文件代码" class="headerlink" title="预期效果：在原目录结构下html文件代码"></a>预期效果：在原目录结构下html文件代码</h4><pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;../css/default.css?v=5a636d79c4&quot;&gt;
-&lt;script src=&quot;../js/app.js?v=3a0d844594&quot;&gt;&lt;/script&gt;
-</code></pre><h4 id="1-安装gulp和gulp插件"><a href="#1-安装gulp和gulp插件" class="headerlink" title="1.安装gulp和gulp插件"></a>1.安装gulp和gulp插件</h4><pre><code>npm install --save-dev gulp
-npm install --save-dev gulp-rev
-npm install --save-dev gulp-rev-collector
-npm install --save-dev run-sequence
-</code></pre><h4 id="2-编写gulpfile-js"><a href="#2-编写gulpfile-js" class="headerlink" title="2.编写gulpfile.js"></a>2.编写gulpfile.js</h4><pre><code>//引入gulp和gulp插件
-var gulp = require(&apos;gulp&apos;),
-runSequence = require(&apos;run-sequence&apos;),
-rev = require(&apos;gulp-rev&apos;),
-revCollector = require(&apos;gulp-rev-collector&apos;);
+        <p><img src="http://op1x388xb.bkt.clouddn.com/timg.jpg" alt="BIGLONGLEG"></p>
 
-//定义css、js源文件路径
-var cssSrc = &apos;css/*.css&apos;,
-    jsSrc = &apos;js/*.js&apos;;
-
-
-//CSS生成文件hash编码并生成 rev-manifest.json文件名对照映射
-gulp.task(&apos;revCss&apos;, function(){
-    return gulp.src(cssSrc)
-        .pipe(rev())
-        .pipe(rev.manifest())
-        .pipe(gulp.dest(&apos;rev/css&apos;));
-});
-
-
-//js生成文件hash编码并生成 rev-manifest.json文件名对照映射
-gulp.task(&apos;revJs&apos;, function(){
-    return gulp.src(jsSrc)
-        .pipe(rev())
-        .pipe(rev.manifest())
-        .pipe(gulp.dest(&apos;rev/js&apos;));
-});
-
-
-//Html替换css、js文件版本
-gulp.task(&apos;revHtml&apos;, function () {
-    return gulp.src([&apos;rev/**/*.json&apos;, &apos;View/*.html&apos;])
-        .pipe(revCollector())
-        .pipe(gulp.dest(&apos;View&apos;));
-});
-
-
-//开发构建
-gulp.task(&apos;dev&apos;, function (done) {
-    condition = false;
-    runSequence(
-        [&apos;revCss&apos;],
-        [&apos;revJs&apos;],
-        [&apos;revHtml&apos;],
-        done);
-});
-
-
-gulp.task(&apos;default&apos;, [&apos;dev&apos;]);
-</code></pre><ul>
-<li><p>执行gulp命令后的效果</p>
-<p>rev目录下生成了manifest.json对应文件</p>
-</li>
-</ul>
-<pre><code>{
-  &quot;default.css&quot;: &quot;default-803a7fe4ae.css&quot;
-}
-
-&lt;link rel=&quot;stylesheet&quot; href=&quot;../css/default-803a7fe4ae.css&quot;&gt;
-&lt;script src=&quot;../js/app-3a0d844594.js&quot;&gt;&lt;/script&gt;
-</code></pre><p>很显然这不是我们需要的效果</p>
-<h4 id="3-更改gulp-rev和gulp-rev-collector"><a href="#3-更改gulp-rev和gulp-rev-collector" class="headerlink" title="3.更改gulp-rev和gulp-rev-collector"></a>3.更改gulp-rev和gulp-rev-collector</h4><p>打开</p>
-<pre><code>node_modules\gulp-rev\index.js
-</code></pre><p>第144行</p>
-<pre><code>manifest[originalFile] = revisionedFile;
-</code></pre><p>更新为:</p>
-<pre><code>manifest[originalFile] = originalFile + &apos;?v=&apos; + file.revHash;
-</code></pre><p>打开</p>
-<pre><code>nodemodules\gulp-rev\nodemodules\rev-path\index.js
-</code></pre><p>10行</p>
-<pre><code>return filename + &apos;-&apos; + hash + ext;
-</code></pre><p>更新为:</p>
-<pre><code>return filename + ext;
-</code></pre><p>打开</p>
-<pre><code>node_modules\gulp-rev-collector\index.js
-</code></pre><p>31行</p>
-<pre><code>if ( !_.isString(json[key]) || path.basename(json[key]).replace(new RegExp( opts.revSuffix ), &apos;&apos; ) !==  path.basename(key) ) {
-</code></pre><p>更新为:</p>
-<pre><code>if ( !_.isString(json[key]) || path.basename(json[key]).split(&apos;?&apos;)[0] !== path.basename(key) ) {
-</code></pre><p>打开</p>
-<pre><code>node_modules\gulp-rev-collector\index.js
-</code></pre><p>第107行</p>
-<pre><code>regexp: new RegExp( &apos;([\/\\\\\&apos;&quot;])&apos; + pattern, &apos;g&apos; ),
-</code></pre><p>更新为:</p>
-<pre><code>regexp: new RegExp( &apos;([\/\\\\\&apos;&quot;])&apos; + pattern+&apos;(\\?v=\\w{10})?&apos;, &apos;g&apos; ),
-</code></pre><h4 id="最终结果"><a href="#最终结果" class="headerlink" title="最终结果"></a>最终结果</h4><p>经过上面的四步修改之后现在你不管执行多少遍gulp命令，得到的html效果都是：</p>
-<pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;../css/default.css?v=5a636d79c4&quot;&gt;
-&lt;script src=&quot;../js/app.js?v=3a0d844594&quot;&gt;&lt;/script&gt;
-</code></pre>
       
 
       
@@ -290,7 +183,7 @@ gulp.task(&apos;default&apos;, [&apos;dev&apos;]);
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Gulp</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
         		</li>
       		
 		</ul>
@@ -346,7 +239,7 @@ gulp.task(&apos;default&apos;, [&apos;dev&apos;]);
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/04/27/gulp-version-manage/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/04/27/biglongleg/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -360,11 +253,15 @@ gulp.task(&apos;default&apos;, [&apos;dev&apos;]);
   
 <nav id="article-nav">
   
-  
-    <a href="/2017/04/27/gulpfile/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">gulpfile 解释</div>
-      <i class="icon-circle-right"></i>
+    <a href="/2017/04/27/lazyload/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Ng2 lazy load with webpack
+        
+      </div>
     </a>
+  
   
 </nav>
 
